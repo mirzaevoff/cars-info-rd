@@ -1,0 +1,47 @@
+.rdContainer{
+  max-width: 1600px;
+  margin: 50px auto;
+}
+.rdFormContainer{
+
+}
+.rdFormGroup{
+  margin: 25px 0;
+}
+
+.rdFormGroup label{
+  color: #333;
+  display: block;
+  font-weight: 800;
+  margin-bottom: 0.5em;
+}
+.rdFormGroup input{
+  color: #666;
+  background: #fff;
+  background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+  border: 1px solid #bbb;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  display: block;
+  padding: 0.5em 1em;
+  width: 50%;
+}
+.rdSubmit{
+  background-color: #222;
+  border: 0;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: 800;
+  line-height: 1;
+  padding: 1em 2em;
+  text-shadow: none;
+  -webkit-transition: background 0.2s;
+  transition: background 0.2s;
+}

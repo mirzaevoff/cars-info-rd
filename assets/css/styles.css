@@ -1,0 +1,19 @@
+.rdFormGroup{
+  margin: 15px 0;
+}
+.rdInput{
+  text-transform: uppercase;
+}
+
+.rdResponse{
+  margin-top: 25px;
+}
+.rdLoading{
+  text-align: center;
+}
+.rdLoading img{
+  width: 40px;
+}
+.rdSubmit{
+  background: red ;
+}
