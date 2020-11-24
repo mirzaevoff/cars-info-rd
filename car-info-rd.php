@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Car Info RD
+Plugin Name: Cars Info RD
 Description: Getting car info by VIN code.
 Version: Alpha 1.0.0
 Author: Мирзаев Ахрорбек (mirby)
