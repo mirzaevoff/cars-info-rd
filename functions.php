@@ -2,8 +2,8 @@
 
 // scripts registering function
 function rd_registerAssets() {
-  wp_register_style( 'car-info-rd-styles', plugins_url( 'car-info-rd/assets/css/styles.css' ) );
-	wp_register_script( 'car-info-rd-jquery', plugins_url( 'car-info-rd/assets/js/jquery-3.5.1.min.js') );
+  wp_register_style( 'car-info-rd-styles', plugin_dir_path( __FILE__ . 'car-info-rd/assets/css/styles.css' ) );
+	wp_register_script( 'car-info-rd-jquery', plugin_dir_path( __FILE__ . 'car-info-rd/assets/js/jquery-3.5.1.min.js') );
 
   wp_enqueue_style( 'car-info-rd-styles' );
 	wp_enqueue_script( 'car-info-rd-jquery' );
