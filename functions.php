@@ -56,7 +56,7 @@ function rd_GetSpecs( ){
 jQuery(document).ready(function($) {
   $( "#rdGetSpecsForm" ).submit(function( event ) {
 
-    $('#rdResponse').html('<div class="rdLoading"><img src="<?php echo plugins_url( 'car-info-rd/assets/img/loading.gif' ); ?>" alt="Loading"/></div>');
+    $('#rdResponse').html('<div class="rdLoading"><img src="<?php echo plugins_url( 'cars-info-rd/assets/img/loading.gif' ); ?>" alt="Loading"/></div>');
 
     var rdVINCode = $( "#rdCarVIN" ).val();
     // Getting an API key from database
