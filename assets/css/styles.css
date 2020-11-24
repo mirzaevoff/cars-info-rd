@@ -17,3 +17,11 @@
 .rdSubmit{
   background: red ;
 }
+.rdSpecs th{
+  min-width: 200px;
+  vertical-align: baseline;
+}
+.rdSpecs th.rdTitle{
+  text-align: center;
+  padding: 15px 0;
+}

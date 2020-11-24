@@ -51,7 +51,7 @@ function cird_settingsPage(){
     {
       $api_key = $_GET['rdAPIKey'];
       $user_id = get_current_user_id();
-        addAPIKey($api_key, $user_id);
+      addAPIKey($api_key, $user_id);
     }
   ?>
   <div class="rdContainer">
@@ -62,7 +62,6 @@ function cird_settingsPage(){
           <label for="rdAPIKey">API key</label>
           <input type="hidden" name="page" value="cird-settings">
           <input type="text" name="rdAPIKey" id="rdAPIKey" class="rdInput" value="<?php echo getAPIKey(get_current_user_id())->api_key; ?>">
-          <div id="rdResponse"></div>
         </div>
         <input type="submit" name="submit" id="rdSubmit" class="rdSubmit" value="Submit">
       </form>

@@ -37,7 +37,7 @@ function deleteTable(){
 
 
 // getting specifications by car VIN code function
-function rd_GetSpecs( $atts ){
+function rd_GetSpecs( ){
 ?>
 <div>
   <form name="rdGetSpecsForm" id="rdGetSpecsForm" class="rdForm" method="GET" action="">
@@ -58,59 +58,29 @@ function rd_GetSpecs( $atts ){
     $('#rdResponse').html('<div class="rdLoading"><img src="<?php echo plugins_url( 'car-info-rd/assets/img/loading.gif' ); ?>" alt="Loading"/></div>');
 
     var rdVINCode = $( "#rdCarVIN" ).val();
+    // Getting an API key from database
     var rdAPIKey = '<?php echo getAPIKey(get_current_user_id())->api_key; ?>';
 
-    var myHeaders = new Headers();
-    myHeaders.append("Host", "marketcheck-prod.apigee.net");
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
-
     function onError(error){
-      $('#rdResponse').html('<h3 style="text-align: center; color: red;">Sorry, but your API key is invalid.</h3>');
+      console.log(error.status);
+      var html = "<h3 style='text-align: center; color: red;''>";
+      if (error.status == 422) html += "<span>Invalid VIN code</span>";
+      if (error.status == 403) html += "<span>Invalid API key</span>";
+      if (error.status == 429) html += "<span>Too many requests</span>";
+      html += "</h3>";
+      $('#rdResponse').html(html);
     }
     function onResult(result){
-      result = {
-        "year": 2012,
-        "make": "Ford",
-        "model": "Focus",
-        "trim": "SE",
-        "short_trim": "SE",
-        "body_type": "Sedan",
-        "vehicle_type": "Car",
-        "transmission": "Manual",
-        "drivetrain": "FWD",
-        "fuel_type": "Regular Unleaded",
-        "engine": "2.0L L4 DOHC 16V",
-        "engine_size": 2,
-        "engine_block": "I",
-        "doors": 4,
-        "cylinders": 4,
-        "made_in": "United States",
-        "steering_type": "R&P",
-        "antibrake_sys": "4-Wheel ABS",
-        "tank_size": "12.4 gallon",
-        "overall_height": "57.70 Inches",
-        "overall_length": "178.50 Inches",
-        "overall_width": "71.80 Inches",
-        "std_seating": "5",
-        "highway_miles": "36 miles/gallon",
-        "city_miles": "26 miles/gallon"
-      }
-
-
-      var html = "<table>";
+      console.log(result);
+      var html = "<table class='rdSpecs'>";
       html += "<tr>";
-      html += "<th>Name</th>";
-      html += "<th>Value</th>";
+      html += "<th class='rdTitle'>Name</th>";
+      html += "<th class='rdTitle'>Value</th>";
       html += "</tr>";
       // переберём массив arr
-      $.each(result,function(index,value){
+      $.each(result.specification,function(index,value){
         html += "<tr>";
-        html += "<td>" + index.replace("_", " ") + "</td>";
+        html += "<th>" + index.replace("_", " ") + "</th>";
         html += "<td>" + value + "</td>";
         html += "</tr>";
       });
@@ -120,12 +90,24 @@ function rd_GetSpecs( $atts ){
       $('#rdResponse').html(html);
     }
 
+    const settings = {
+    	"async": true,
+    	"crossDomain": true,
+    	"url": "https://vindecoder.p.rapidapi.com/v2.0/decode_vin?vin=" + rdVINCode,
+    	"method": "GET",
+    	"headers": {
+    		"x-rapidapi-key": rdAPIKey,
+    		"x-rapidapi-host": "vindecoder.p.rapidapi.com"
+    	}
+    };
 
-
-    fetch("http://api.marketcheck.com/v2/decode/car/" + rdVINCode + "/specs?api_key=" + rdAPIKey, requestOptions)
-      .then(response => response.text())
-      .then(result => onResult(result))
-      .catch(error => onResult(error));
+    $.ajax(settings)
+    .done(function (response) {
+    	onResult(response);
+    })
+    .fail( function(xhr, textStatus, errorThrown) {
+        onError(xhr);
+    });
 
 
     event.preventDefault();
