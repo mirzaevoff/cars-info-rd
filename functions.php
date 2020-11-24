@@ -2,8 +2,8 @@
 
 // scripts registering function
 function rd_registerAssets() {
-  wp_register_style( 'car-info-rd-styles', plugins_url('cars-info-rd-1.0.6/assets/css/' ) );
-	wp_register_script( 'car-info-rd-jquery', plugins_url('cars-info-rd-1.0.6/assets/js/jquery-3.5.1.min.js') );
+  wp_register_style( 'car-info-rd-styles', plugins_url('cars-info-rd/assets/css/styles.css' ) );
+	wp_register_script( 'car-info-rd-jquery', plugins_url('cars-info-rd/assets/js/jquery-3.5.1.min.js') );
 
   wp_enqueue_style( 'car-info-rd-styles' );
 	wp_enqueue_script( 'car-info-rd-jquery' );
@@ -53,6 +53,7 @@ function rd_GetSpecs( ){
 
 
 <script>
+jQuery(document).ready(function($) {
   $( "#rdGetSpecsForm" ).submit(function( event ) {
 
     $('#rdResponse').html('<div class="rdLoading"><img src="<?php echo plugins_url( 'car-info-rd/assets/img/loading.gif' ); ?>" alt="Loading"/></div>');
@@ -91,19 +92,19 @@ function rd_GetSpecs( ){
     }
 
     const settings = {
-    	"async": true,
-    	"crossDomain": true,
-    	"url": "https://vindecoder.p.rapidapi.com/v2.0/decode_vin?vin=" + rdVINCode,
-    	"method": "GET",
-    	"headers": {
-    		"x-rapidapi-key": rdAPIKey,
-    		"x-rapidapi-host": "vindecoder.p.rapidapi.com"
-    	}
+      "async": true,
+      "crossDomain": true,
+      "url": "https://vindecoder.p.rapidapi.com/v2.0/decode_vin?vin=" + rdVINCode,
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-key": rdAPIKey,
+        "x-rapidapi-host": "vindecoder.p.rapidapi.com"
+      }
     };
 
     $.ajax(settings)
     .done(function (response) {
-    	onResult(response);
+      onResult(response);
     })
     .fail( function(xhr, textStatus, errorThrown) {
         onError(xhr);
@@ -112,6 +113,8 @@ function rd_GetSpecs( ){
 
     event.preventDefault();
   });
+});
+
 </script>
 
 <?php
